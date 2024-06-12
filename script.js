@@ -9,74 +9,82 @@ function getComputerChoice() {
     return(choice[Math.floor(Math.random()*choice.length)])
 }
 
+function playRound(humanChoice, computerSelection){
+    console.log(computerSelection) 
+    
 
-function getHumanChoice() {
-    let playerChoice = prompt("what will you choose?", "Pssst... choose rock").toLowerCase()
-    while (playerChoice !== "rock" && playerChoice !== "paper" && playerChoice !== "scissors") {
-        let playerChoice = prompt("Try again! What will you choose?", "Pssst... choose rock")
-        return playerChoice
-    }
-    return playerChoice
-}
-
-function playRound(humanChoice, computerChoice){
-    console.log(computerChoice) 
-
-    if (humanChoice === computerChoice) {
+    if (humanChoice === computerSelection) {
         console.log("Its a Tie!")
     }
    
     if (humanChoice === "rock") {
-        if (computerChoice === "scissors") {
-            console.log("Rock Beats Scissors! YOU WIN!")
-            humanScore++
-            return
-        }else if (computerChoice === "paper") {
+        if (computerSelection === "scissors") {
+            console.log("Rock Beats Scissors! YOU WIN!")           
+            return humanScore++
+        }else if (computerSelection === "paper") {
             console.log("Paper Beats Rock! YOU LOSE!")
-            computerScore++
-            return
+            return computerScore++
         } 
     }
 
     if (humanChoice === "paper") {
-        if (computerChoice === "rock") {
+        if (computerSelection === "rock") {
             console.log("Paper Beats Rock! YOU WIN!")
-            humanScore++
-            return
-        }else if (computerChoice === "scissors") {
+            return humanScore++
+        }else if (computerSelection === "scissors") {
             console.log("Scissors Beats Paper! YOU LOSE!")
-            computerScore++
-            return
+            return computerScore++
         }
     }
 
     if (humanChoice === "scissors") {
-        if (computerChoice === "rock") {
-            console.log("Rock Beats Scissors! YOU LOSE!")
-            computerScore++
-            return
-        }else if (computerChoice === "paper") {
+        if (computerSelection === "rock") {
+            console.log("Rock Beats Scissors! YOU LOSE!")           
+            return computerScore++
+        }else if (computerSelection === "paper") {
             console.log("Scissors Beats Paper! YOU WIN!")
-            humanScore++
-            return 
+            return humanScore++
         }
     }
 }
 
+const rockButton = document.querySelector("#rock");
+rockButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    playRound("rock", computerSelection);
+    return
+});
 
+const paperButton = document.querySelector("#paper");
+paperButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    playRound("paper", computerSelection);
+    return
+});
 
-function playGame() {
+const scissorsButton = document.querySelector("#scissors");
+scissorsButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    playRound("scissors", computerSelection);
+    return
+});
 
-    for (let i = 0; i < 5; i++) {
+const scoreBoardPlayer = document.createElement("div");
+scoreBoardPlayer.classList.add('scorer')
+scoreBoardPlayer.textContent = "Player's Score"
+document.body.appendChild(scoreBoardPlayer)
 
-        const humanSelection = getHumanChoice(choice)
-        const computerSelection = getComputerChoice(choice)
-        
-        playRound(humanSelection, computerSelection)
-        console.log("Player Score: " + humanScore)
-        console.log("Computer Score: " + computerScore)
+const scoreBoardComputer = document.createElement("div");
+scoreBoardComputer.classList.add('scorer')
+scoreBoardComputer.textContent = "Computer's Score"
+document.body.appendChild(scoreBoardComputer)
 
-    }
-}
+const scorePlayer = document.createElement("div");
+scorePlayer.classList.add('scores')
+scorePlayer.textContent  = humanScore
+document.body.appendChild(scorePlayer)
 
-playGame()
+const scoreComputer = document.createElement("div");
+scoreComputer.classList.add('scores')
+scoreComputer.textContent = computerScore
+document.body.appendChild(scoreComputer)
