@@ -1,51 +1,76 @@
-console.log("Hello World")
+console.log("Hello World");
 
 const choice = ["rock", "paper", "scissors"];
 
-let humanScore = 0
-let computerScore = 0
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
-    return(choice[Math.floor(Math.random()*choice.length)])
+    return(choice[Math.floor(Math.random()*choice.length)]);
 }
 
 function playRound(humanChoice, computerSelection){
-    console.log(computerSelection) 
+    console.log(computerSelection); 
     
 
     if (humanChoice === computerSelection) {
-        console.log("Its a Tie!")
+        console.log("Its a Tie!");
     }
    
     if (humanChoice === "rock") {
         if (computerSelection === "scissors") {
-            console.log("Rock Beats Scissors! YOU WIN!")           
-            return humanScore++
+            console.log("Rock Beats Scissors! YOU WIN!");           
+            humanScore++;
         }else if (computerSelection === "paper") {
-            console.log("Paper Beats Rock! YOU LOSE!")
-            return computerScore++
+            console.log("Paper Beats Rock! YOU LOSE!");
+            computerScore++;
         } 
     }
 
     if (humanChoice === "paper") {
         if (computerSelection === "rock") {
-            console.log("Paper Beats Rock! YOU WIN!")
-            return humanScore++
+            console.log("Paper Beats Rock! YOU WIN!");
+            humanScore++;
         }else if (computerSelection === "scissors") {
-            console.log("Scissors Beats Paper! YOU LOSE!")
-            return computerScore++
+            console.log("Scissors Beats Paper! YOU LOSE!");
+            computerScore++;
         }
     }
 
     if (humanChoice === "scissors") {
         if (computerSelection === "rock") {
-            console.log("Rock Beats Scissors! YOU LOSE!")           
-            return computerScore++
+            console.log("Rock Beats Scissors! YOU LOSE!");           
+            computerScore++;
         }else if (computerSelection === "paper") {
-            console.log("Scissors Beats Paper! YOU WIN!")
-            return humanScore++
+            console.log("Scissors Beats Paper! YOU WIN!");
+            humanScore++;
         }
     }
+    updateScore();
+    victoryReq();
+    return;
+}
+
+function updateScore() {
+    document.querySelector("#computer-score"). textContent = computerScore; 
+    document.querySelector("#player-score").textContent = humanScore;
+}
+
+function reset() {
+    computerScore = 0;
+    humanScore = 0;
+    updateScore();
+}
+
+function victoryReq() {
+    if (computerScore === 5) {
+        alert("The Computer has won and you have lost! :'(");
+        reset();
+    } else if (humanScore === 5) {
+        alert("You win! F&^% the computer!");
+        reset();
+    }
+    return;
 }
 
 const rockButton = document.querySelector("#rock");
@@ -70,21 +95,23 @@ scissorsButton.addEventListener("click", () => {
 });
 
 const scoreBoardPlayer = document.createElement("div");
-scoreBoardPlayer.classList.add('scorer')
-scoreBoardPlayer.textContent = "Player's Score"
-document.body.appendChild(scoreBoardPlayer)
+scoreBoardPlayer.classList.add('scorer');
+scoreBoardPlayer.textContent = "Player's Score";
+document.body.appendChild(scoreBoardPlayer);
 
 const scoreBoardComputer = document.createElement("div");
-scoreBoardComputer.classList.add('scorer')
-scoreBoardComputer.textContent = "Computer's Score"
-document.body.appendChild(scoreBoardComputer)
+scoreBoardComputer.classList.add('scorer');
+scoreBoardComputer.textContent = "Computer's Score";
+document.body.appendChild(scoreBoardComputer);
 
 const scorePlayer = document.createElement("div");
-scorePlayer.classList.add('scores')
-scorePlayer.textContent  = humanScore
-document.body.appendChild(scorePlayer)
+scorePlayer.classList.add('scores');
+scorePlayer.setAttribute("id", "player-score");
+scorePlayer.textContent  = humanScore;
+document.body.appendChild(scorePlayer);
 
 const scoreComputer = document.createElement("div");
-scoreComputer.classList.add('scores')
-scoreComputer.textContent = computerScore
-document.body.appendChild(scoreComputer)
+scoreComputer.classList.add('scores');
+scoreComputer.setAttribute("id", "computer-score");
+scoreComputer.textContent = computerScore;
+document.body.appendChild(scoreComputer);
