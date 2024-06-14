@@ -95,23 +95,23 @@ scissorsButton.addEventListener("click", () => {
 });
 
 const scoreBoardPlayer = document.createElement("div");
-scoreBoardPlayer.classList.add('scorer');
+scoreBoardPlayer.classList.add('player');
 scoreBoardPlayer.textContent = "Player's Score";
 document.body.appendChild(scoreBoardPlayer);
 
 const scoreBoardComputer = document.createElement("div");
-scoreBoardComputer.classList.add('scorer');
+scoreBoardComputer.classList.add('computer');
 scoreBoardComputer.textContent = "Computer's Score";
 document.body.appendChild(scoreBoardComputer);
 
 const scorePlayer = document.createElement("div");
-scorePlayer.classList.add('scores');
+scorePlayer.classList.add('player');
 scorePlayer.setAttribute("id", "player-score");
 scorePlayer.textContent  = humanScore;
 document.body.appendChild(scorePlayer);
 
 const scoreComputer = document.createElement("div");
-scoreComputer.classList.add('scores');
+scoreComputer.classList.add('computer');
 scoreComputer.setAttribute("id", "computer-score");
 scoreComputer.textContent = computerScore;
 document.body.appendChild(scoreComputer);
